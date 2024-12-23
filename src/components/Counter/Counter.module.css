@@ -1,0 +1,48 @@
+/* Counter.module.css */
+.counterContainer {
+  margin: 50px auto;
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.counterTitle {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.timeDisplay {
+  font-size: 24px;
+  margin: 10px 0;
+  color: #333; 
+}
+
+.timeDisplayContainer {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.timeLabel {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.timeValue {
+  font-size: 24px;
+  color: #333;
+}
+
+
+.errorMessage {
+  color: red;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+
