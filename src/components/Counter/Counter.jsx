@@ -6,6 +6,7 @@ const Counter = () => {
   const [timeRemaining, setTimeRemaining] = useState(null);
   const [timePassed, setTimePassed] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCounterData = async () => {
@@ -21,6 +22,8 @@ const Counter = () => {
         setError(null); // Сбрасываем ошибку
         setTimeRemaining(null); // Обнуляем время при ошибке
         setTimePassed(null);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -53,7 +56,9 @@ const Counter = () => {
   return (
     <div className={styles.counterContainer}>
       <h1 className={styles.counterTitle}>Sobriety Counter</h1>
-      {error ? (
+      {loading ? (
+        <div className={styles.spinner}></div> 
+      ) : error ? (
         <p className={styles.errorMessage}>{error}</p>
       ) : timeRemaining === null && timePassed === null ? (
         <p className={styles.timeDisplay}>The counter hasn't started</p>
