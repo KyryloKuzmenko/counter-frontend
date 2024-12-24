@@ -55,9 +55,9 @@ const Counter = () => {
 
   return (
     <div className={styles.counterContainer}>
-      <h1 className={styles.counterTitle}>Sobriety Counter</h1>
+      <h1 className={styles.counterTitle}>Nataliia's Sobriety Counter</h1>
       {loading ? (
-        <div className={styles.spinner}></div> 
+        <div className={styles.spinner}></div>
       ) : error ? (
         <p className={styles.errorMessage}>{error}</p>
       ) : timeRemaining === null && timePassed === null ? (
@@ -65,7 +65,7 @@ const Counter = () => {
       ) : (
         <>
           <div className={styles.timeDisplayContainer}>
-            <p className={styles.timeLabel}>Time Left:</p>
+            <p className={styles.timeLabel}>Time Left</p>
             <div className={styles.timeValue}>
               {timeRemaining &&
                 timeRemaining.map((value, index) => (
@@ -77,7 +77,7 @@ const Counter = () => {
             </div>
           </div>
           <div className={styles.timeDisplayContainer}>
-            <p className={styles.timeLabel}>Time Elapsed:</p>
+            <p className={styles.timeLabel}>Time Elapsed</p>
             <div className={styles.timeValue}>
               {timePassed &&
                 timePassed.map((value, index) => (
