@@ -14,12 +14,12 @@ const Counter = () => {
           "https://countdown-app-backend-eeb0.onrender.com/data"
         );
         const { timeRemaining, timePassed } = response.data;
-        setTimeRemaining(timeRemaining);
-        setTimePassed(timePassed);
+        setTimeRemaining(formatTime(timeRemaining));
+        setTimePassed(formatTime(timePassed));
         setError(null);
       } catch (error) {
-        setError(null);
-        setTimeRemaining(null); // Устанавливаем `null` для времени, если сброшено
+        setError(null); // Сбрасываем ошибку
+        setTimeRemaining(null); // Обнуляем время при ошибке
         setTimePassed(null);
       }
     };
@@ -32,19 +32,27 @@ const Counter = () => {
   }, []);
 
   const formatTime = (ms) => {
-    if (!ms || ms < 0) return "0 days : 0 hours : 0 minutes : 0 seconds";
+    if (!ms || ms < 0) return ["00", "00", "00", "00"];
     const totalSeconds = Math.floor(ms / 1000);
-    const days = Math.floor(totalSeconds / (24 * 3600));
-    const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+    const days = Math.floor(totalSeconds / (24 * 3600))
+      .toString()
+      .padStart(2, "0");
+    const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600)
+      .toString()
+      .padStart(2, "0");
+    const minutes = Math.floor((totalSeconds % 3600) / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = (totalSeconds % 60).toString().padStart(2, "0");
 
-    return `${days} days : ${hours} hours : ${minutes} minutes : ${seconds} seconds`;
+    return [days, hours, minutes, seconds];
   };
+
+  const labels = ["Days", "Hours", "Minutes", "Seconds"];
 
   return (
     <div className={styles.counterContainer}>
-      <h1 className={styles.counterTitle}>Sobriety counter</h1>
+      <h1 className={styles.counterTitle}>Sobriety Counter</h1>
       {error ? (
         <p className={styles.errorMessage}>{error}</p>
       ) : timeRemaining === null && timePassed === null ? (
@@ -52,12 +60,28 @@ const Counter = () => {
       ) : (
         <>
           <div className={styles.timeDisplayContainer}>
-            <p className={styles.timeLabel}>Time left:</p>
-            <p className={styles.timeValue}>{formatTime(timeRemaining)}</p>
+            <p className={styles.timeLabel}>Time Left:</p>
+            <div className={styles.timeValue}>
+              {timeRemaining &&
+                timeRemaining.map((value, index) => (
+                  <div key={index} className={styles.timeCard}>
+                    <div className={styles.timeNumber}>{value}</div>
+                    <div className={styles.timeLabelBelow}>{labels[index]}</div>
+                  </div>
+                ))}
+            </div>
           </div>
           <div className={styles.timeDisplayContainer}>
-            <p className={styles.timeLabel}>Time elapsed:</p>
-            <p className={styles.timeValue}>{formatTime(timePassed)}</p>
+            <p className={styles.timeLabel}>Time Elapsed:</p>
+            <div className={styles.timeValue}>
+              {timePassed &&
+                timePassed.map((value, index) => (
+                  <div key={index} className={styles.timeCard}>
+                    <div className={styles.timeNumber}>{value}</div>
+                    <div className={styles.timeLabelBelow}>{labels[index]}</div>
+                  </div>
+                ))}
+            </div>
           </div>
         </>
       )}

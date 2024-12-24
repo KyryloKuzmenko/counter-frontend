@@ -15,21 +15,7 @@ function App() {
   return (
     <div>
       {!token && (
-        <button
-          onClick={openModal}
-          style={{
-            position: "absolute",
-            top: "10px",
-            left: "10px",
-            padding: "10px 20px",
-            fontSize: "16px",
-            backgroundColor: "#007BFF",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
+        <button onClick={openModal} className="control-panel-button">
           Control Panel
         </button>
       )}
@@ -42,7 +28,7 @@ function App() {
         <Login
           setToken={(token) => {
             setToken(token);
-            closeModal(); 
+            closeModal();
           }}
         />
       </Modal>

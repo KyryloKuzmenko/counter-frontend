@@ -1,48 +1,118 @@
 /* Counter.module.css */
+
 .counterContainer {
-  margin: 50px auto;
   text-align: center;
-  max-width: 600px;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .counterTitle {
-  font-size: 32px;
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: 20px;
   color: #333;
 }
 
-.timeDisplay {
-  font-size: 24px;
-  margin: 10px 0;
-  color: #333; 
-}
-
 .timeDisplayContainer {
-  margin: 20px 0;
-  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .timeLabel {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
   color: #555;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .timeValue {
-  font-size: 24px;
-  color: #333;
+  display: flex;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e90ff;
+}
+
+.timeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f4;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.timeNumber {
+  font-size: 20px;
+  font-weight: bold;
+  color: #38a169;
+}
+
+.timeLabelBelow {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Кнопка Control Panel */
+.controlPanelButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 14px;
+  padding: 10px 16px;
+  background: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.controlPanelButton:hover {
+  background: #0077cc;
+}
+
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 768px) {
+  .counterContainer {
+    padding: 15px;
+  }
+
+  .counterTitle {
+    font-size: 20px;
+  }
+
+  .timeLabel {
+    font-size: 14px;
+  }
+
+  .timeValue {
+    font-size: 18px;
+  }
+
+  .timeNumber {
+    font-size: 18px;
+  }
+
+  .timeLabelBelow {
+    font-size: 10px;
+  }
+
+  .controlPanelButton {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
 }
 
 
-.errorMessage {
-  color: red;
-  font-size: 16px;
-  margin-top: 10px;
-}
 
 
