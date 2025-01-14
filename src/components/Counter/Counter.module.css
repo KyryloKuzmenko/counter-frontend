@@ -10,12 +10,46 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 .counterTitle {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 20px;
   color: #333;
 }
+
+/* Центрируем profile */
+.profile {
+  display: flex; /* Делаем flex-контейнером */
+  align-items: center; /* Центрируем по вертикали */
+  justify-content: center; /* Центрируем по горизонтали */
+  gap: 20px; /* Отступ между аватаром и текстом */
+  margin: 20px auto; /* Центрируем по горизонтали */
+}
+
+
+
+.avatar {
+  display: block;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.info p {
+  margin: 0; /* Убираем отступы, чтобы не было перекоса */
+  padding: 0; /* Убираем внутренние отступы */
+  display: flex; /* Выравниваем содержимое в строку */
+  align-items: center; /* Центрируем по вертикали */
+}
+
+.info span {
+  font-weight: bold; /* Выделяем ключевые элементы */
+  margin-right: 8px; /* Отступ между "Name:" и значением */
+}
+
+
 
 .timeDisplayContainer {
   margin-bottom: 20px;

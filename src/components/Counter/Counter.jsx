@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { formatDate } from "../../utils/dateUtils";
+
 import styles from "./Counter.module.css";
 
 const Counter = () => {
+  const [formattedStartDate, setFormattedStartDate] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(null);
   const [timePassed, setTimePassed] = useState(null);
   const [error, setError] = useState(null);
@@ -14,7 +17,8 @@ const Counter = () => {
         const response = await axios.get(
           "https://countdown-app-backend-eeb0.onrender.com/data"
         );
-        const { timeRemaining, timePassed } = response.data;
+        const { timeRemaining, timePassed, startDate } = response.data;
+        setFormattedStartDate(formatDate(startDate)); 
         setTimeRemaining(formatTime(timeRemaining));
         setTimePassed(formatTime(timePassed));
         setError(null);
@@ -55,41 +59,67 @@ const Counter = () => {
 
   return (
     <div className={styles.counterContainer}>
-      <h1 className={styles.counterTitle}>Nataliia's Sobriety Counter</h1>
-      {loading ? (
-        <div className={styles.spinner}></div>
-      ) : error ? (
-        <p className={styles.errorMessage}>{error}</p>
-      ) : timeRemaining === null && timePassed === null ? (
-        <p className={styles.timeDisplay}>The counter hasn't started</p>
-      ) : (
-        <>
-          <div className={styles.timeDisplayContainer}>
-            <p className={styles.timeLabel}>Time Left</p>
-            <div className={styles.timeValue}>
-              {timeRemaining &&
-                timeRemaining.map((value, index) => (
-                  <div key={index} className={styles.timeCard}>
-                    <div className={styles.timeNumber}>{value}</div>
-                    <div className={styles.timeLabelBelow}>{labels[index]}</div>
-                  </div>
-                ))}
+      <h1 className={styles.counterTitle}>Sobriety Counter</h1>
+      <div className={styles.profile}>
+        <img
+          className={styles.avatar}
+          src="/Natalka.png"
+          alt="girl"
+          width="60"
+          height="60"
+        />
+        <div className={styles.info}>
+          <p>
+            <span>Name:</span> Nataliia
+          </p>
+          <p>
+            <span>Birth:</span> May 24, 1993
+          </p>
+          <p>
+            <span>Started:</span> {formattedStartDate}
+          </p>
+        </div>
+      </div>
+      <div className={styles.data}>
+        {loading ? (
+          <div className={styles.spinner}></div>
+        ) : error ? (
+          <p className={styles.errorMessage}>{error}</p>
+        ) : timeRemaining === null && timePassed === null ? (
+          <p className={styles.timeDisplay}>The counter hasn't started</p>
+        ) : (
+          <>
+            <div className={styles.timeDisplayContainer}>
+              <p className={styles.timeLabel}>Time Left</p>
+              <div className={styles.timeValue}>
+                {timeRemaining &&
+                  timeRemaining.map((value, index) => (
+                    <div key={index} className={styles.timeCard}>
+                      <div className={styles.timeNumber}>{value}</div>
+                      <div className={styles.timeLabelBelow}>
+                        {labels[index]}
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
-          </div>
-          <div className={styles.timeDisplayContainer}>
-            <p className={styles.timeLabel}>Time Elapsed</p>
-            <div className={styles.timeValue}>
-              {timePassed &&
-                timePassed.map((value, index) => (
-                  <div key={index} className={styles.timeCard}>
-                    <div className={styles.timeNumber}>{value}</div>
-                    <div className={styles.timeLabelBelow}>{labels[index]}</div>
-                  </div>
-                ))}
+            <div className={styles.timeDisplayContainer}>
+              <p className={styles.timeLabel}>Time Elapsed</p>
+              <div className={styles.timeValue}>
+                {timePassed &&
+                  timePassed.map((value, index) => (
+                    <div key={index} className={styles.timeCard}>
+                      <div className={styles.timeNumber}>{value}</div>
+                      <div className={styles.timeLabelBelow}>
+                        {labels[index]}
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
